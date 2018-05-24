@@ -5,26 +5,29 @@
 (function(root, factory){
     root.localstorate_tools = factory(root);
 })(typeof global !== "undefined" ? global : this.window || this.global,  function (root) {
+    root.LS_NOFIND = -3;
+    root.LS_SUCCESS = 0;
     var localstorate_tools = {
         // 判断缓存是否过期
         checkCache : function(key, time, condition){
-            if('undefined' == typeof key) { console.log('未传key'); return false;}
-            if('undefined' == typeof condition) { console.log('未传condition'); return false;}
+            if('undefined' == typeof key) { console.log('未传key'); return -1;}
+            if('undefined' == typeof condition) { console.log('未传condition'); return -2;}
             if('undefined' == typeof time) {
                 time = parseInt( (new Date().getTime()) / 1000 )
             }
             var ls_value = localStorage.getItem(key);
             ls_value = JSON.parse(ls_value);
+            if(null == ls_value) { console.log('localStorage不存在该数据'); return -3;}
             switch(condition){
                 default:
                     console.log('不支持这个判断，请输入> | >= | == | <= | <');
-                    return;
+                    return -4;
                     break;
                 case '>': case '>=': case '==': case '<=': case '<':
                     if( eval('time '+condition+' ls_value.c') ){
-                        return true;
+                        return 0;
                     }
-                    return false;
+                    return -5;
                     break;
             }
         },
@@ -52,7 +55,7 @@
             if('undefined' == typeof created_at) {
                 created_at = parseInt( (new Date().getTime()) / 1000 )
             }
-            if( this.checkCache(key, time, '>' ) ){
+            if( 0 == this.checkCache(key, time, '>' ) ){
                 localStorage.removeItem(key);
             }
         }
