@@ -7,7 +7,7 @@
 })(typeof global !== "undefined" ? global : this.window || this.global,  function (root) {
     var localstorate_tools = {
         // 判断缓存是否过期
-        checkCache : function(key, condition, time){
+        checkCache : function(key, time, condition){
             if('undefined' == typeof key) { console.log('未传key'); return false;}
             if('undefined' == typeof condition) { console.log('未传condition'); return false;}
             if('undefined' == typeof time) {
@@ -52,7 +52,7 @@
             if('undefined' == typeof created_at) {
                 created_at = parseInt( (new Date().getTime()) / 1000 )
             }
-            if( this.checkCache(key, '>', time) ){
+            if( this.checkCache(key, time, '>' ) ){
                 localStorage.removeItem(key);
             }
         }
