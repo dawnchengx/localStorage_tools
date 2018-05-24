@@ -2,9 +2,13 @@
 localstorage工具
 
 支持函数：
+
 dawn_ls_tools.checkCache('键', '传入的时间和localstorage之间的关系（> | >= | == | <= | <）', '要比对的时间（时间戳，不传表示当前时间）' )  // 判断缓存是否过期
+
 dawn_ls_tools.addCache('键', '值', '存入的时间（时间戳，不传表示当前时间）') // 存值
+
 dawn_ls_tools.getCache('键') // 取值
+
 dawn_ls_tools.delCacheByTime('键', '传入时间（时间戳，不传表示当前时间）') // 当前时间或传入时间 大于 缓存时间，删除对应元素
         
 
